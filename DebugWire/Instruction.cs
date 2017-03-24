@@ -11,5 +11,13 @@ namespace DebugWire
         public Instruction(byte[] data) : base(data)
         {
         }
+
+        public Instruction(string data) : base(data)
+        {
+
+        }
+
+        public Instruction(ushort data) : base(data)
+        { }
     }
 }

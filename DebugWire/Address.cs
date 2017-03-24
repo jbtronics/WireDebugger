@@ -11,5 +11,12 @@ namespace DebugWire
         public Address(byte[] data) : base(data)
         {
         }
+
+        public Address(string data) : base(data)
+        {
+        }
+
+        public Address(ushort data) : base(data)
+        { }
     }
 }

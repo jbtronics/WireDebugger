@@ -50,25 +50,25 @@
             this.txt_signature = new System.Windows.Forms.TextBox();
             this.label_signature = new System.Windows.Forms.Label();
             this.tab_infos = new System.Windows.Forms.TabPage();
-            this.group_pc = new System.Windows.Forms.GroupBox();
-            this.btn_pc_read = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txt_pc = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_instr_read = new System.Windows.Forms.Button();
+            this.btn_instr_write = new System.Windows.Forms.Button();
+            this.txt_instr = new System.Windows.Forms.TextBox();
             this.group_hwbp = new System.Windows.Forms.GroupBox();
             this.btn_bp_read = new System.Windows.Forms.Button();
             this.btn_bp_write = new System.Windows.Forms.Button();
             this.txt_BP = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_instr_read = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.txt_instr = new System.Windows.Forms.TextBox();
+            this.group_pc = new System.Windows.Forms.GroupBox();
+            this.btn_pc_read = new System.Windows.Forms.Button();
+            this.btn_pc_write = new System.Windows.Forms.Button();
+            this.txt_pc = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_fcpu)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tab_general.SuspendLayout();
             this.tab_infos.SuspendLayout();
-            this.group_pc.SuspendLayout();
-            this.group_hwbp.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.group_hwbp.SuspendLayout();
+            this.group_pc.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_stop
@@ -76,7 +76,7 @@
             this.btn_stop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_stop.Enabled = false;
-            this.btn_stop.Location = new System.Drawing.Point(582, 14);
+            this.btn_stop.Location = new System.Drawing.Point(582, 12);
             this.btn_stop.Name = "btn_stop";
             this.btn_stop.Size = new System.Drawing.Size(75, 23);
             this.btn_stop.TabIndex = 0;
@@ -326,43 +326,44 @@
             this.tab_infos.Text = "Data";
             this.tab_infos.UseVisualStyleBackColor = true;
             // 
-            // group_pc
+            // groupBox1
             // 
-            this.group_pc.Controls.Add(this.btn_pc_read);
-            this.group_pc.Controls.Add(this.button1);
-            this.group_pc.Controls.Add(this.txt_pc);
-            this.group_pc.Location = new System.Drawing.Point(6, 6);
-            this.group_pc.Name = "group_pc";
-            this.group_pc.Size = new System.Drawing.Size(625, 50);
-            this.group_pc.TabIndex = 0;
-            this.group_pc.TabStop = false;
-            this.group_pc.Text = "Program Counter";
+            this.groupBox1.Controls.Add(this.btn_instr_read);
+            this.groupBox1.Controls.Add(this.btn_instr_write);
+            this.groupBox1.Controls.Add(this.txt_instr);
+            this.groupBox1.Location = new System.Drawing.Point(6, 118);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(625, 50);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Instruction";
             // 
-            // btn_pc_read
+            // btn_instr_read
             // 
-            this.btn_pc_read.Location = new System.Drawing.Point(175, 17);
-            this.btn_pc_read.Name = "btn_pc_read";
-            this.btn_pc_read.Size = new System.Drawing.Size(75, 23);
-            this.btn_pc_read.TabIndex = 7;
-            this.btn_pc_read.Text = "Read PC";
-            this.btn_pc_read.UseVisualStyleBackColor = true;
-            this.btn_pc_read.Click += new System.EventHandler(this.btn_pc_read_Click);
+            this.btn_instr_read.Location = new System.Drawing.Point(175, 17);
+            this.btn_instr_read.Name = "btn_instr_read";
+            this.btn_instr_read.Size = new System.Drawing.Size(75, 23);
+            this.btn_instr_read.TabIndex = 7;
+            this.btn_instr_read.Text = "Read Instr.";
+            this.btn_instr_read.UseVisualStyleBackColor = true;
+            this.btn_instr_read.Click += new System.EventHandler(this.btn_instr_read_Click);
             // 
-            // button1
+            // btn_instr_write
             // 
-            this.button1.Location = new System.Drawing.Point(278, 17);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Write PC";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_instr_write.Location = new System.Drawing.Point(278, 17);
+            this.btn_instr_write.Name = "btn_instr_write";
+            this.btn_instr_write.Size = new System.Drawing.Size(75, 23);
+            this.btn_instr_write.TabIndex = 1;
+            this.btn_instr_write.Text = "Run Instr.";
+            this.btn_instr_write.UseVisualStyleBackColor = true;
+            this.btn_instr_write.Click += new System.EventHandler(this.btn_instr_write_Click);
             // 
-            // txt_pc
+            // txt_instr
             // 
-            this.txt_pc.Location = new System.Drawing.Point(6, 19);
-            this.txt_pc.Name = "txt_pc";
-            this.txt_pc.Size = new System.Drawing.Size(143, 20);
-            this.txt_pc.TabIndex = 0;
+            this.txt_instr.Location = new System.Drawing.Point(6, 19);
+            this.txt_instr.Name = "txt_instr";
+            this.txt_instr.Size = new System.Drawing.Size(143, 20);
+            this.txt_instr.TabIndex = 0;
             // 
             // group_hwbp
             // 
@@ -394,6 +395,7 @@
             this.btn_bp_write.TabIndex = 1;
             this.btn_bp_write.Text = "Write BP";
             this.btn_bp_write.UseVisualStyleBackColor = true;
+            this.btn_bp_write.Click += new System.EventHandler(this.btn_bp_write_Click);
             // 
             // txt_BP
             // 
@@ -402,43 +404,44 @@
             this.txt_BP.Size = new System.Drawing.Size(143, 20);
             this.txt_BP.TabIndex = 0;
             // 
-            // groupBox1
+            // group_pc
             // 
-            this.groupBox1.Controls.Add(this.btn_instr_read);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.txt_instr);
-            this.groupBox1.Location = new System.Drawing.Point(6, 118);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(625, 50);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Instruction";
+            this.group_pc.Controls.Add(this.btn_pc_read);
+            this.group_pc.Controls.Add(this.btn_pc_write);
+            this.group_pc.Controls.Add(this.txt_pc);
+            this.group_pc.Location = new System.Drawing.Point(6, 6);
+            this.group_pc.Name = "group_pc";
+            this.group_pc.Size = new System.Drawing.Size(625, 50);
+            this.group_pc.TabIndex = 0;
+            this.group_pc.TabStop = false;
+            this.group_pc.Text = "Program Counter";
             // 
-            // btn_instr_read
+            // btn_pc_read
             // 
-            this.btn_instr_read.Location = new System.Drawing.Point(175, 17);
-            this.btn_instr_read.Name = "btn_instr_read";
-            this.btn_instr_read.Size = new System.Drawing.Size(75, 23);
-            this.btn_instr_read.TabIndex = 7;
-            this.btn_instr_read.Text = "Read Instr.";
-            this.btn_instr_read.UseVisualStyleBackColor = true;
-            this.btn_instr_read.Click += new System.EventHandler(this.btn_instr_read_Click);
+            this.btn_pc_read.Location = new System.Drawing.Point(175, 17);
+            this.btn_pc_read.Name = "btn_pc_read";
+            this.btn_pc_read.Size = new System.Drawing.Size(75, 23);
+            this.btn_pc_read.TabIndex = 7;
+            this.btn_pc_read.Text = "Read PC";
+            this.btn_pc_read.UseVisualStyleBackColor = true;
+            this.btn_pc_read.Click += new System.EventHandler(this.btn_pc_read_Click);
             // 
-            // button4
+            // btn_pc_write
             // 
-            this.button4.Location = new System.Drawing.Point(278, 17);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "Run Instr.";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_pc_write.Location = new System.Drawing.Point(278, 17);
+            this.btn_pc_write.Name = "btn_pc_write";
+            this.btn_pc_write.Size = new System.Drawing.Size(75, 23);
+            this.btn_pc_write.TabIndex = 1;
+            this.btn_pc_write.Text = "Write PC";
+            this.btn_pc_write.UseVisualStyleBackColor = true;
+            this.btn_pc_write.Click += new System.EventHandler(this.btn_pc_write_Click);
             // 
-            // txt_instr
+            // txt_pc
             // 
-            this.txt_instr.Location = new System.Drawing.Point(6, 19);
-            this.txt_instr.Name = "txt_instr";
-            this.txt_instr.Size = new System.Drawing.Size(143, 20);
-            this.txt_instr.TabIndex = 0;
+            this.txt_pc.Location = new System.Drawing.Point(6, 19);
+            this.txt_pc.Name = "txt_pc";
+            this.txt_pc.Size = new System.Drawing.Size(143, 20);
+            this.txt_pc.TabIndex = 0;
             // 
             // Form1
             // 
@@ -461,12 +464,12 @@
             this.tab_general.ResumeLayout(false);
             this.tab_general.PerformLayout();
             this.tab_infos.ResumeLayout(false);
-            this.group_pc.ResumeLayout(false);
-            this.group_pc.PerformLayout();
-            this.group_hwbp.ResumeLayout(false);
-            this.group_hwbp.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.group_hwbp.ResumeLayout(false);
+            this.group_hwbp.PerformLayout();
+            this.group_pc.ResumeLayout(false);
+            this.group_pc.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -499,14 +502,14 @@
         private System.Windows.Forms.GroupBox group_pc;
         private System.Windows.Forms.TextBox txt_pc;
         private System.Windows.Forms.Button btn_pc_read;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_pc_write;
         private System.Windows.Forms.GroupBox group_hwbp;
         private System.Windows.Forms.Button btn_bp_read;
         private System.Windows.Forms.Button btn_bp_write;
         private System.Windows.Forms.TextBox txt_BP;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_instr_read;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_instr_write;
         private System.Windows.Forms.TextBox txt_instr;
     }
 }

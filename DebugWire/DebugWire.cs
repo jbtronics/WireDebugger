@@ -40,6 +40,7 @@ namespace DebugWire
         const byte CMD_RESET        = 0x07;
         const byte CMD_DISABLE_DW   = 0x06;
         const byte CMD_SS           = 0x31;
+        const byte CMD_SS_INSTR     = 0x23;
         //Read Data
         const byte CMD_GET_PC       = 0xf0;
         const byte CMD_GET_HWBP     = 0xf1;
@@ -215,7 +216,7 @@ namespace DebugWire
         }
 
         /// <summary>
-        /// Reads the the opcode of the current instruction from target and returns it as byte array.
+        /// Reads the the opcode of the last set instruction and returns it as byte array.
         /// </summary>
         /// <returns>A byte array containing the opcode.</returns>
         public async Task<byte[]> getInstructionRaw()
@@ -223,9 +224,46 @@ namespace DebugWire
             return await write_cmd(CMD_GET_INSTR, 2);
         }
 
+        /// <summary>
+        /// Reads the opcode of the last set instruction and returns it as Instruction array.
+        /// </summary>
+        /// <returns></returns>
         public async Task<Instruction> getInstruction()
         {
             return new Instruction(await getInstructionRaw());
+        }
+
+        /// <summary>
+        /// Sets the Progress Counter to the given Address.
+        /// </summary>
+        /// <param name="addr">A Address object.</param>
+        public async Task setPC(Address addr)
+        {
+            var bytes = merge_command_argument(CMD_SET_PC, addr.Bytes);
+            await write_cmd(bytes, 0);
+        }
+
+        /// <summary>
+        /// Sets the Hardware Breakpoint to the given Address.
+        /// </summary>
+        /// <param name="addr">An Address object.</param>
+        public async Task setHWBP(Address addr)
+        {
+            var bytes = merge_command_argument(CMD_SET_HWBP, addr.Bytes);
+            await write_cmd(bytes, 0);
+        }
+
+        /// <summary>
+        /// Runs the given Instruction on the target.
+        /// </summary>
+        /// <param name="instr">The instruction which should be run.</param>
+        public async Task runInstruction(Instruction instr)
+        {
+            var bytes = merge_command_argument(CMD_SET_INSTR, instr.Bytes);
+            await write_cmd(bytes, 0); //Load Instruction
+
+            await write_cmd(CMD_SS_INSTR, 0); //Run Instruction
+
         }
 
         /// <summary>
@@ -235,6 +273,24 @@ namespace DebugWire
         private int get_baud()
         {
             return _fcpu / 128;
+        }
+
+        /// <summary>
+        /// Merges a cmd byte and an argument byte array into one byte array.
+        /// </summary>
+        /// <param name="cmd">The command byte.</param>
+        /// <param name="arg">The arguments for the command.</param>
+        /// <returns>A byte array containing command and arguments.</returns>
+        private byte[] merge_command_argument(byte cmd, byte[] arg)
+        {
+            byte[] arr = new byte[arg.Length + 1];
+            arr[0] = cmd;
+            for(int i=0;i<arg.Length;i++)
+            {
+                arr[i + 1] = arg[i];
+            }
+
+            return arr;
         }
 
         /// <summary>

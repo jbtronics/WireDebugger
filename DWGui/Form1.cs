@@ -108,5 +108,20 @@ namespace DWGui
             var res = await dw.getInstruction();
             txt_instr.Text = res.ToString();
         }
+
+        private async void btn_pc_write_Click(object sender, EventArgs e)
+        {
+            await dw.setPC(new DebugWire.Address(txt_pc.Text));
+        }
+
+        private async void btn_bp_write_Click(object sender, EventArgs e)
+        {
+            await dw.setHWBP(new DebugWire.Address(txt_BP.Text));
+        }
+
+        private async void btn_instr_write_Click(object sender, EventArgs e)
+        {
+            await dw.runInstruction(new DebugWire.Instruction(txt_instr.Text));
+        }
     }
 }
