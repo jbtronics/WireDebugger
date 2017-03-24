@@ -78,7 +78,7 @@
             this.btn_stop.Enabled = false;
             this.btn_stop.Location = new System.Drawing.Point(582, 12);
             this.btn_stop.Name = "btn_stop";
-            this.btn_stop.Size = new System.Drawing.Size(75, 23);
+            this.btn_stop.Size = new System.Drawing.Size(75, 24);
             this.btn_stop.TabIndex = 0;
             this.btn_stop.Text = "RESUME";
             this.btn_stop.UseVisualStyleBackColor = true;
