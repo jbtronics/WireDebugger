@@ -118,6 +118,7 @@ namespace DebugWire
             return new Signature(await getSignatureRaw());   
         }
 
+
         /// <summary>
         /// Calculates a suitable baudrate for the DebugWire port.
         /// </summary>
@@ -127,6 +128,13 @@ namespace DebugWire
             return _fcpu / 128;
         }
 
+        /// <summary>
+        /// Outputs the given cmds and data to the MCU and receive the given amount of bytes. Waits the given time before reading the  
+        /// </summary>
+        /// <param name="cmd">The commands and the data, which should be sent, as byte array.</param>
+        /// <param name="expected_bytes">How many bytes should be received, after transmission of the command.</param>
+        /// <param name="sleeptime">Time in ms, how long should be waited before read targets answer.</param>
+        /// <returns>A byte array with the targets answer</returns>
         private async Task<byte[]> write_cmd(byte[] cmd, int expected_bytes, int sleeptime)
         {
             if (cmd.Length == 0)
@@ -152,6 +160,12 @@ namespace DebugWire
             return result;
         }
 
+        /// <summary>
+        /// Outputs the given cmds and data to the MCU and receive the given amount of bytes.
+        /// </summary>
+        /// <param name="cmd">The commands and the data, which should be sent, as byte array.</param>
+        /// <param name="expected_bytes">How many bytes should be received, after transmission of the command.</param>
+        /// <returns>A byte array with the targets answer</returns>
         private async Task<byte[]> write_cmd(byte[] cmd, int expected_bytes)
         {
             return await write_cmd(cmd, expected_bytes, _sleeptime);
