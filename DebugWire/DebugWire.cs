@@ -88,6 +88,7 @@ namespace DebugWire
             }
         }
 
+
         /// <summary>
         /// Resume the execution on the target after a break;
         /// </summary>
@@ -207,10 +208,24 @@ namespace DebugWire
         /// <summary>
         /// Reads the value of the Hardware Breakpoint from target and returns it as Address object.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A Address object describing the address of the Hardware Breakpoint.</returns>
         public async Task<Address> getHWBP()
         {
             return new Address(await getHWBPRaw());
+        }
+
+        /// <summary>
+        /// Reads the the opcode of the current instruction from target and returns it as byte array.
+        /// </summary>
+        /// <returns>A byte array containing the opcode.</returns>
+        public async Task<byte[]> getInstructionRaw()
+        {
+            return await write_cmd(CMD_GET_INSTR, 2);
+        }
+
+        public async Task<Instruction> getInstruction()
+        {
+            return new Instruction(await getInstructionRaw());
         }
 
         /// <summary>
