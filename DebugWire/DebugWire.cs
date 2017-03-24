@@ -34,12 +34,22 @@ namespace DebugWire
         private object serialincoming = new Object();
 
         //DebugWire Command bytes
+        //Basic commands
         const byte CMD_BREAK        = 0x00;
         const byte CMD_RESUME       = 0x30;
         const byte CMD_RESET        = 0x07;
         const byte CMD_DISABLE_DW   = 0x06;
-        const byte CMD_GET_FUSE     = 0xf3;
-
+        const byte CMD_SS           = 0x31;
+        //Read Data
+        const byte CMD_GET_PC       = 0xf0;
+        const byte CMD_GET_HWBP     = 0xf1;
+        const byte CMD_GET_INSTR    = 0xf2;
+        const byte CMD_GET_SIG      = 0xf3;
+        //Write Data
+        const byte CMD_SET_PC       = 0xd0;
+        const byte CMD_SET_HWBP     = 0xd1;
+        const byte CMD_SET_INSTR    = 0xd2;
+        //Results
         const byte RESULT_OK        = 0x55;
 
         /// <summary>
@@ -97,6 +107,20 @@ namespace DebugWire
         }
 
         /// <summary>
+        /// Disables DebugWire on the target and reactivate ISP.
+        /// After this command you can not use DebuWire until deactivate and activate power.
+        /// </summary>
+        /// <returns>true if the disabling was successful.</returns>
+        public async Task<bool> disableDW()
+        {
+            var result = await write_cmd(CMD_DISABLE_DW, 2);
+            if (result[2] == RESULT_OK)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
         /// Resets the target and restart it if desired.
         /// </summary>
         /// <param name="start">true if the target should be restart after reset. If set to false the target must be restarted manually with call of halt()</param>
@@ -118,12 +142,25 @@ namespace DebugWire
         }
 
         /// <summary>
+        /// Performs only the next instructions on the target. (Single Stepping).
+        /// </summary>
+        /// <returns>true if the single step was successful.</returns>
+        public async Task<bool> singleStep()
+        {
+            var result = await write_cmd(CMD_SS, 3);
+            if (result[2] == RESULT_OK)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
         /// Reads the signataure of the target and returns it as a byte array.
         /// </summary>
         /// <returns>A byte array containing the target signature.</returns>
         public async Task<byte[]> getSignatureRaw()
         {
-            return await write_cmd(CMD_GET_FUSE, 2);
+            return await write_cmd(CMD_GET_SIG, 2);
         }
 
         /// <summary>
@@ -135,6 +172,46 @@ namespace DebugWire
             return new Signature(await getSignatureRaw());   
         }
 
+
+        /// <summary>
+        /// Reads the value of the Programm Counter (PC) from the target.
+        /// It contains the current address, which is executed.
+        /// </summary>
+        /// <returns>The value of the PC.</returns>
+        public async Task<Address> getPC()
+        {
+            var result = await write_cmd(CMD_GET_PC, 2);
+            return new Address(result);
+        }
+
+        /// <summary>
+        /// Reads the value of the Programm Counter (PC) from the target and return it as byte array.
+        /// It contains the current address, which is executed.
+        /// </summary>
+        /// <returns>A byte array containing the address.</returns>
+        public async Task<byte[]> getPCRaw()
+        {
+            var addr = await write_cmd(CMD_GET_PC, 2);
+            return addr;
+        }
+
+        /// <summary>
+        /// Reads the value of the Hardware Breakpoint from target and returns it as byte array.
+        /// </summary>
+        /// <returns>A byte array containing the read address.</returns>
+        public async Task<byte[]> getHWBPRaw()
+        {
+            return await write_cmd(CMD_GET_HWBP, 2);
+        }
+
+        /// <summary>
+        /// Reads the value of the Hardware Breakpoint from target and returns it as Address object.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Address> getHWBP()
+        {
+            return new Address(await getHWBPRaw());
+        }
 
         /// <summary>
         /// Calculates a suitable baudrate for the DebugWire port.

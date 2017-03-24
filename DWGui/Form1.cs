@@ -51,5 +51,21 @@ namespace DWGui
             MessageBox.Show("The fuse bytes are " + r);
             MessageBox.Show("So it is a " + r.Name);
         }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            var r = await dw.getPC();
+            MessageBox.Show("The PC is " + r.ToString());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dw.disableDW();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dw.singleStep();
+        }
     }
 }
